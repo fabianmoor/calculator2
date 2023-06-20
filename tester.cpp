@@ -2,30 +2,26 @@
 #include <cstring>
 #include <string>
 
-using namespace std;
-
-
 bool is_listEmpty(char* x) {
-  return strlen(x) == 0;
+  return std::strlen(x) == 0;
 }
 
 
-
-
-
-
-
-
-
-char x[1] = '*';
-
-
-
-
-
-
+bool is_Char(char x) {
+    return (typeid(x) == typeid(char));
+}
 
 int main() {
-  cout << is_listEmpty(x) << endl;
-  return 0;
+    char x = 'x';
+
+    std::cout << is_Char(x) << std::endl;
+
 }
+//char x[1] = {'*'};
+
+//int main() {
+//    std::cout << is_listEmpty(x) << std::endl;
+//  return 0;
+//}
+
+

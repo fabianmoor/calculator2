@@ -1,11 +1,6 @@
-
-
-
-
-
-
-
-
+#include <iostream>
+#include <cstring>
+#include <string>
 // från start av program båda listorna null
 //
 // if input == char:
@@ -19,16 +14,6 @@
 
 using namespace std;
 
-bool not_empty(x){
-  if x[0] != null
-}
-
-
-
-
-
-
-
 int main() {
-  return 0;
+return 0;
 }
