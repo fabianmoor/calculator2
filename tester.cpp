@@ -4,6 +4,7 @@
 #include <termios.h>
 #include <unistd.h>
 
+using namespace std;
 
 // Check if list is empty
 bool is_varEmpty(char x) {
@@ -11,8 +12,8 @@ bool is_varEmpty(char x) {
 }
 
 // Function that checks if variable is Char
-bool is_Char(char x) {
-    return (typeid(x) == typeid(char));
+bool is_Char(int x) {
+    return (x >= 'a' && x <= 'z') || (x >= 'A' && x <= 'Z') || x == '/' || x == '+' || x == '*' || x == '-';
 }
 
 char getch() {
@@ -27,8 +28,11 @@ char getch() {
     newSettings.c_lflag &= ~(ICANON | ECHO);
     tcsetattr(STDIN_FILENO, TCSANOW, &newSettings);
 
-    // Read a single character from the user
-    read(STDIN_FILENO, &ch, 1);
+    // Loop until a valid input is entered
+    do {
+        // Read a single character from the user
+        read(STDIN_FILENO, &ch, 1);
+    } while (ch != '+' && ch != '-' && ch != '*' && ch != '/' && (ch < '0' || ch > '9') && ch != 127);
 
     // Restore original terminal settings
     tcsetattr(STDIN_FILENO, TCSANOW, &oldSettings);
@@ -36,44 +40,40 @@ char getch() {
     return ch;
 }
 
-
-float calculate(int x, float y, float result) {
+float calculate(int x, float result) {
     // Multiply the result by 10 and add x to the ones place
     result = result * 10 + x;
-
-    // Convert y to an integer by truncating the decimal part
-    int yAsInt = static_cast<int>(y);
-
-    // Multiply the result by 10 and add yAsInt to the ones place
-    result = result * 10 + yAsInt;
-
     return result;
 }
 
 
-//   1 - 12
-//   if 
-
-//int main() {
-//    std::cout << "Enter a character: ";
-//    char input = getch();
-//    std::cout << "\nYou entered: " << input << std::endl;
-//
-//    return 0;
-//}
-
-
-//
-//int main() {
-//    char x = 'x';
-//
-//    std::cout << is_Char(x) << std::endl;
-//
-//}
-//char x[1] = {'*'};
-
-//int main() {
-//    std::cout << is_listEmpty(x) << std::endl;
-//  return 0;
-//}
+void printCalculator(float left, float right, float sum, char oper) {
+    system("clear");
+    cout << "------------------------" << endl;
+    cout << "|        Fabians       |" << endl;
+    cout << "|       Calculator     |" << endl;
+    cout << "|                      |" << endl;
+    cout << "|----------------------|" << endl;
+    cout << "|                      |" << endl;
+    cout << "| " << left;
+        if (oper != '0') {
+            cout << " " << oper;
+        }
+        if (right != 0) {
+            cout << " " << right;
+        }
+    cout << endl;
+    cout << "| " << sum << endl;
+    cout << "|                      |" << endl;
+    cout << "|                      |" << endl;
+    cout << "|                      |" << endl;
+    cout << "|                      |" << endl;
+    cout << "|                      |" << endl;
+    cout << "|                      |" << endl;
+    cout << "|                      |" << endl;
+    cout << "|                      |" << endl;
+    cout << "|                      |" << endl;
+    cout << "|                      |" << endl;
+    cout << "------------------------" << endl; 
+}
 
